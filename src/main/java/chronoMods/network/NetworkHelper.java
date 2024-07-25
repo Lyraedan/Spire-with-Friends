@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.map.MapRoomNode;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.mainMenu.MainMenuScreen;
 
+import Lyraedan.networking.eos.EOSIntegration;
 import Lyraedan.networking.packets.ActPacket;
 import Lyraedan.networking.packets.AddPotionSlotPacket;
 import Lyraedan.networking.packets.AtDoorPacket;
@@ -176,6 +177,15 @@ public class NetworkHelper {
 		}
 		else {
 			TogetherManager.log("Discord Integration not found.");
+		}
+		// If EOS avilable, add EOSIntegration
+		EOSIntegration eos = new EOSIntegration();
+		eos.initialize();
+		if(eos.isInitialized()) {
+			TogetherManager.log("EOS Started.");
+			networks.add(eos);
+		} else {
+			TogetherManager.log("EOS Integration not found.");
 		}
 	}
 
